@@ -17,6 +17,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas/")
+                arg("room.incremental", "true")
+            }
+        }
     }
 
     buildTypes {
@@ -92,6 +98,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.2.1'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
+    implementation 'joda-time:joda-time:2.10.6'
     implementation 'com.xently.xui:core:1.1.4'
     implementation 'com.xently.xui:dialog:1.1.4'
 
