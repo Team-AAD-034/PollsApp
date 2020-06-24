@@ -1,4 +1,6 @@
 package com.teamaad34.polls.data.repository.questions
 
-interface IQuestionsRepository {
+import com.teamaad34.polls.data.source.IQuestionDataSource
+
+interface IQuestionsRepository : IQuestionDataSource {
 }

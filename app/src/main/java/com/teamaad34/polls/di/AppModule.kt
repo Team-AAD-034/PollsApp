@@ -1,9 +1,15 @@
 package com.teamaad34.polls.di
 
-import com.teamaad34.polls.data.repository.voters.IVoterRepository
-import com.teamaad34.polls.data.repository.voters.VoterRepository
+import com.teamaad34.polls.data.source.IChoiceDataSource
+import com.teamaad34.polls.data.source.IQuestionDataSource
 import com.teamaad34.polls.data.source.IVoterDataSource
+import com.teamaad34.polls.data.source.local.ChoiceLocalDataSource
+import com.teamaad34.polls.data.source.local.QuestionLocalDataSource
 import com.teamaad34.polls.data.source.local.VoterLocalDataSource
+import com.teamaad34.polls.data.source.local.dao.ChoicesDao
+import com.teamaad34.polls.data.source.local.dao.QuestionsDao
+import com.teamaad34.polls.data.source.remote.ChoiceRemoteDataSource
+import com.teamaad34.polls.data.source.remote.QuestionRemoteDataSource
 import com.teamaad34.polls.data.source.remote.VoterRemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -25,6 +31,26 @@ object AppModule {
     @Retention(AnnotationRetention.RUNTIME)
     annotation class RemoteVoterDataSource
 
+    @Qualifier
+    @MustBeDocumented
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class LocalQuestionDataSource
+
+    @Qualifier
+    @MustBeDocumented
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class RemoteQuestionDataSource
+
+    @Qualifier
+    @MustBeDocumented
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class LocalChoiceDataSource
+
+    @Qualifier
+    @MustBeDocumented
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class RemoteChoiceDataSource
+
     @Provides
     @Singleton
     @LocalVoterDataSource
@@ -34,16 +60,26 @@ object AppModule {
     @Singleton
     @RemoteVoterDataSource
     fun provideVoterRemoteDataSource(): IVoterDataSource = VoterRemoteDataSource()
-}
 
-@Module
-@InstallIn(ApplicationComponent::class)
-object RepositoryModule {
     @Provides
     @Singleton
-    fun provideVoterRepository(
-        @AppModule.LocalVoterDataSource local: IVoterDataSource,
-        @AppModule.RemoteVoterDataSource remote: IVoterDataSource
-    ): IVoterRepository = VoterRepository(local, remote)
+    @LocalQuestionDataSource
+    fun provideQuestionLocalDataSource(dao: QuestionsDao): IQuestionDataSource =
+        QuestionLocalDataSource(dao)
 
+    @Provides
+    @Singleton
+    @RemoteQuestionDataSource
+    fun provideQuestionRemoteDataSource(): IQuestionDataSource = QuestionRemoteDataSource()
+
+    @Provides
+    @Singleton
+    @LocalChoiceDataSource
+    fun provideChoiceLocalDataSource(dao: ChoicesDao): IChoiceDataSource =
+        ChoiceLocalDataSource(dao)
+
+    @Provides
+    @Singleton
+    @RemoteChoiceDataSource
+    fun provideChoiceRemoteDataSource(): IChoiceDataSource = ChoiceRemoteDataSource()
 }
