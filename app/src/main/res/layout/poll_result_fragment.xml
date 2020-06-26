@@ -5,6 +5,14 @@
 
     <data>
 
+        <import type="com.teamaad34.polls.data.model.Question" />
+
+        <import type="com.teamaad34.polls.data.model.Choice" />
+
+        <variable
+            name="question"
+            type="Question" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,35 +30,54 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppTheme.AppBar.Toolbar"
-                app:navigationIcon="@drawable/ic_navigate_back"
-                app:popupTheme="@style/ThemeOverlay.AppTheme.Toolbar.Popup">
+                android:layout_height="176dp"
+                app:expandedTitleTextAppearance="?attr/textAppearanceHeadline5"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:title="@{question.question ?? @string/app_name}"
+                app:titleEnabled="true"
+                app:toolbarId="@id/toolbar"
+                tools:title="What is your favourite color?">
 
-                <TextView
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/app_name"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:theme="@style/ThemeOverlay.AppTheme.AppBar.Toolbar"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_navigate_back"
+                    app:popupTheme="@style/ThemeOverlay.AppTheme.Toolbar.Popup" />
 
-            </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline4"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:justificationMode="inter_word"
+            android:padding="16dp"
+            android:text="@{question.description}"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintBottom_toTopOf="@id/choices"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appbar"
-            tools:text="Poll Results" />
+            tools:ignore="UnusedAttribute"
+            tools:text="The poll seeks to collect information on peoples color preference" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/choices"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

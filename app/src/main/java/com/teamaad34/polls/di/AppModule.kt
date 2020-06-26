@@ -2,15 +2,15 @@ package com.teamaad34.polls.di
 
 import com.teamaad34.polls.data.source.IChoiceDataSource
 import com.teamaad34.polls.data.source.IQuestionDataSource
-import com.teamaad34.polls.data.source.IVoterDataSource
+import com.teamaad34.polls.data.source.IUserDataSource
 import com.teamaad34.polls.data.source.local.ChoiceLocalDataSource
 import com.teamaad34.polls.data.source.local.QuestionLocalDataSource
-import com.teamaad34.polls.data.source.local.VoterLocalDataSource
+import com.teamaad34.polls.data.source.local.UserLocalDataSource
 import com.teamaad34.polls.data.source.local.dao.ChoicesDao
 import com.teamaad34.polls.data.source.local.dao.QuestionsDao
 import com.teamaad34.polls.data.source.remote.ChoiceRemoteDataSource
 import com.teamaad34.polls.data.source.remote.QuestionRemoteDataSource
-import com.teamaad34.polls.data.source.remote.VoterRemoteDataSource
+import com.teamaad34.polls.data.source.remote.UserRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,12 +24,12 @@ object AppModule {
     @Qualifier
     @MustBeDocumented
     @Retention(AnnotationRetention.RUNTIME)
-    annotation class LocalVoterDataSource
+    annotation class LocalUserDataSource
 
     @Qualifier
     @MustBeDocumented
     @Retention(AnnotationRetention.RUNTIME)
-    annotation class RemoteVoterDataSource
+    annotation class RemoteUserDataSource
 
     @Qualifier
     @MustBeDocumented
@@ -53,13 +53,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    @LocalVoterDataSource
-    fun provideVoterLocalDataSource(): IVoterDataSource = VoterLocalDataSource()
+    @LocalUserDataSource
+    fun provideUserLocalDataSource(): IUserDataSource = UserLocalDataSource()
 
     @Provides
     @Singleton
-    @RemoteVoterDataSource
-    fun provideVoterRemoteDataSource(): IVoterDataSource = VoterRemoteDataSource()
+    @RemoteUserDataSource
+    fun provideUserRemoteDataSource(): IUserDataSource = UserRemoteDataSource()
 
     @Provides
     @Singleton

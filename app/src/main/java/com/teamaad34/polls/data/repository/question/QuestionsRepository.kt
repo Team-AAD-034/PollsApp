@@ -1,4 +1,4 @@
-package com.teamaad34.polls.data.repository.questions
+package com.teamaad34.polls.data.repository.question
 
 import com.teamaad34.polls.data.data
 import com.teamaad34.polls.data.listData
@@ -21,7 +21,7 @@ class QuestionsRepository internal constructor(
 
     override suspend fun createQuestions(questions: List<Question>) = withContext(ioDispatcher) {
         remote.createQuestions(questions).run {
-            local.createQuestions(listData)
+            local.createQuestions(data ?: questions)
         }
     }
 
@@ -39,16 +39,17 @@ class QuestionsRepository internal constructor(
 
     override suspend fun getQuestion(id: String) = withContext(ioDispatcher) {
         remote.getQuestion(id).run {
-            data?.run {
-                local.createQuestion(this)
-                local.getQuestion(id)
+            data?.let {
+                local.createQuestion(it)
+//                local.getQuestion(it.id) // Repetitive - done by above
             } ?: this
         }
     }
 
     override suspend fun getQuestions() = withContext(ioDispatcher) {
         remote.getQuestions().run {
-            createQuestions(listData)
+            local.createQuestions(listData)
+//            local.getQuestions() // Repetitive - done by above
         }
     }
 

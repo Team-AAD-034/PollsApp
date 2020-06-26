@@ -1,4 +1,4 @@
-package com.teamaad34.polls
+package com.teamaad34.polls.utils
 
 import androidx.room.TypeConverter
 import com.google.firebase.Timestamp

@@ -7,6 +7,7 @@ import com.teamaad34.polls.data.model.Choice
 import com.teamaad34.polls.data.model.Question
 import com.teamaad34.polls.data.source.local.dao.ChoicesDao
 import com.teamaad34.polls.data.source.local.dao.QuestionsDao
+import com.teamaad34.polls.utils.TimestampConverter
 
 @Database(
     entities = [Question::class, Choice::class],

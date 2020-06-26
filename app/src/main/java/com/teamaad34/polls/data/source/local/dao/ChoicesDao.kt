@@ -9,6 +9,9 @@ interface ChoicesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createChoice(choice: Choice)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun createChoices(choices: List<Choice>)
+
     @Delete
     suspend fun removeChoice(choice: Choice): Int
 
@@ -17,6 +20,12 @@ interface ChoicesDao {
 
     @Query("SELECT * FROM choices WHERE id = :id;")
     suspend fun getChoice(id: String): Choice
+
+    @Query("SELECT * FROM choices;")
+    suspend fun getChoices(): List<Choice>
+
+    @Query("SELECT * FROM choices;")
+    fun getObservableChoices(): LiveData<List<Choice>>
 
     @Query("SELECT * FROM choices WHERE questionId = :questionId;")
     suspend fun getChoices(questionId: String): List<Choice>
