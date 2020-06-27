@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.teamaad34.polls.PollsDatabase
 import com.teamaad34.polls.data.source.local.dao.ChoicesDao
 import com.teamaad34.polls.data.source.local.dao.QuestionsDao
+import com.teamaad34.polls.data.source.local.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,4 +33,8 @@ object StorageModule {
     @Provides
     @Singleton
     fun provideChoicesDao(db: PollsDatabase): ChoicesDao = db.choicesDao
+
+    @Provides
+    @Singleton
+    fun provideUserDao(db: PollsDatabase): UserDao = db.userDao
 }

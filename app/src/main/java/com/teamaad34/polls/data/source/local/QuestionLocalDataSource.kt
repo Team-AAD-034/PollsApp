@@ -7,11 +7,15 @@ import com.teamaad34.polls.data.model.Question
 import com.teamaad34.polls.data.source.IQuestionDataSource
 import com.teamaad34.polls.data.source.local.dao.QuestionsDao
 
+/**
+ * Does CRUD(Create, Read, Update & Delete) operations in the local database with the help of
+ * Room Dao
+ */
 class QuestionLocalDataSource internal constructor(private val dao: QuestionsDao) :
     IQuestionDataSource {
     override suspend fun createQuestion(question: Question): TaskResult<Question> {
         dao.createQuestion(question)
-        return Success(dao.getQuestion(question.id).question)
+        return getQuestion(question.id)
     }
 
     override suspend fun createQuestions(questions: List<Question>): TaskResult<List<Question>> {
@@ -28,9 +32,5 @@ class QuestionLocalDataSource internal constructor(private val dao: QuestionsDao
     override suspend fun getQuestions() = Success(dao.getQuestions().map { it.question })
 
     override suspend fun getObservableQuestions() =
-        Transformations.map(dao.getObservableQuestions()) {
-            it.map { question ->
-                question.question
-            }
-        }
+        Transformations.map(dao.getObservableQuestions()) { qwc -> qwc.map { it.question } }
 }

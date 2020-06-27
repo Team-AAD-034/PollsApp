@@ -1,14 +1,14 @@
 package com.teamaad34.polls.di
 
-import com.teamaad34.polls.data.repository.choices.ChoicesRepository
-import com.teamaad34.polls.data.repository.choices.IChoicesRepository
-import com.teamaad34.polls.data.repository.questions.IQuestionsRepository
-import com.teamaad34.polls.data.repository.questions.QuestionsRepository
-import com.teamaad34.polls.data.repository.voters.IVoterRepository
-import com.teamaad34.polls.data.repository.voters.VoterRepository
+import com.teamaad34.polls.data.repository.choice.ChoicesRepository
+import com.teamaad34.polls.data.repository.choice.IChoicesRepository
+import com.teamaad34.polls.data.repository.question.IQuestionsRepository
+import com.teamaad34.polls.data.repository.question.QuestionsRepository
+import com.teamaad34.polls.data.repository.user.IUserRepository
+import com.teamaad34.polls.data.repository.user.UserRepository
 import com.teamaad34.polls.data.source.IChoiceDataSource
 import com.teamaad34.polls.data.source.IQuestionDataSource
-import com.teamaad34.polls.data.source.IVoterDataSource
+import com.teamaad34.polls.data.source.IUserDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,10 +21,11 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideVoterRepository(
-        @AppModule.LocalVoterDataSource local: IVoterDataSource,
-        @AppModule.RemoteVoterDataSource remote: IVoterDataSource
-    ): IVoterRepository = VoterRepository(local, remote)
+    fun provideUserRepository(
+        @AppModule.LocalUserDataSource local: IUserDataSource,
+        @AppModule.RemoteUserDataSource remote: IUserDataSource,
+        ioDispatcher: CoroutineDispatcher
+    ): IUserRepository = UserRepository(local, remote, ioDispatcher)
 
     @Provides
     @Singleton

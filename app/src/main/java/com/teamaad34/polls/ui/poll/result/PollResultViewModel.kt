@@ -2,8 +2,8 @@ package com.teamaad34.polls.ui.poll.result
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import com.teamaad34.polls.data.repository.choices.IChoicesRepository
-import com.teamaad34.polls.data.repository.questions.IQuestionsRepository
+import com.teamaad34.polls.data.repository.choice.IChoicesRepository
+import com.teamaad34.polls.data.repository.question.IQuestionsRepository
 
 class PollResultViewModel @ViewModelInject constructor(
     private val questionsRepository: IQuestionsRepository,

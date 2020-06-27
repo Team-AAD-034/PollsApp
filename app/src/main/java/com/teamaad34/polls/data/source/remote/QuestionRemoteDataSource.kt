@@ -7,6 +7,9 @@ import com.teamaad34.polls.data.listData
 import com.teamaad34.polls.data.model.Question
 import com.teamaad34.polls.data.source.IQuestionDataSource
 
+/**
+ * Does CRUD(Create, Read, Update & Delete) operations in the remote sever(Firebase)
+ */
 class QuestionRemoteDataSource internal constructor() : IQuestionDataSource {
     override suspend fun createQuestion(question: Question): TaskResult<Question> {
         TODO("Not yet implemented")
