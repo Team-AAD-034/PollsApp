@@ -22,24 +22,24 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideUserRepository(
-        @AppModule.LocalUserDataSource local: IUserDataSource,
-        @AppModule.RemoteUserDataSource remote: IUserDataSource,
+        @LocalUserDataSource local: IUserDataSource,
+        @RemoteUserDataSource remote: IUserDataSource,
         ioDispatcher: CoroutineDispatcher
     ): IUserRepository = UserRepository(local, remote, ioDispatcher)
 
     @Provides
     @Singleton
     fun provideQuestionRepository(
-        @AppModule.LocalQuestionDataSource local: IQuestionDataSource,
-        @AppModule.RemoteQuestionDataSource remote: IQuestionDataSource,
+        @LocalQuestionDataSource local: IQuestionDataSource,
+        @RemoteQuestionDataSource remote: IQuestionDataSource,
         ioDispatcher: CoroutineDispatcher
     ): IQuestionsRepository = QuestionsRepository(local, remote, ioDispatcher)
 
     @Provides
     @Singleton
     fun provideChoiceRepository(
-        @AppModule.LocalChoiceDataSource local: IChoiceDataSource,
-        @AppModule.RemoteChoiceDataSource remote: IChoiceDataSource,
+        @LocalChoiceDataSource local: IChoiceDataSource,
+        @RemoteChoiceDataSource remote: IChoiceDataSource,
         ioDispatcher: CoroutineDispatcher
     ): IChoicesRepository = ChoicesRepository(local, remote, ioDispatcher)
 
