@@ -1,6 +1,5 @@
 package com.teamaad34.polls.data.source.remote
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.teamaad34.polls.data.TaskResult
 import com.teamaad34.polls.data.TaskResult.Success
@@ -30,7 +29,6 @@ class ChoiceRemoteDataSource internal constructor() : IChoiceDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getObservableChoices(questionId: String?): LiveData<List<Choice>> {
-        return MutableLiveData(getChoices(questionId).listData)
-    }
+    override suspend fun getObservableChoices(questionId: String?) =
+        MutableLiveData(getChoices(questionId).listData)
 }

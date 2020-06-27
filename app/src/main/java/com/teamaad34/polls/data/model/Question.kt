@@ -34,11 +34,13 @@ data class Question(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(question)
-        parcel.writeString(description)
-        parcel.writeParcelable(creationDate, flags)
-        parcel.writeTypedList(choices)
+        parcel.run {
+            writeString(id)
+            writeString(question)
+            writeString(description)
+            writeParcelable(creationDate, flags)
+            writeTypedList(choices)
+        }
     }
 
     override fun describeContents(): Int = 0

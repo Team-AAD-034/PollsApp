@@ -8,6 +8,7 @@ import com.teamaad34.polls.data.source.local.QuestionLocalDataSource
 import com.teamaad34.polls.data.source.local.UserLocalDataSource
 import com.teamaad34.polls.data.source.local.dao.ChoicesDao
 import com.teamaad34.polls.data.source.local.dao.QuestionsDao
+import com.teamaad34.polls.data.source.local.dao.UserDao
 import com.teamaad34.polls.data.source.remote.ChoiceRemoteDataSource
 import com.teamaad34.polls.data.source.remote.QuestionRemoteDataSource
 import com.teamaad34.polls.data.source.remote.UserRemoteDataSource
@@ -54,7 +55,7 @@ object AppModule {
     @Provides
     @Singleton
     @LocalUserDataSource
-    fun provideUserLocalDataSource(): IUserDataSource = UserLocalDataSource()
+    fun provideUserLocalDataSource(dao: UserDao): IUserDataSource = UserLocalDataSource(dao)
 
     @Provides
     @Singleton

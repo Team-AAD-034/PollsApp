@@ -23,8 +23,9 @@ object RepositoryModule {
     @Singleton
     fun provideUserRepository(
         @AppModule.LocalUserDataSource local: IUserDataSource,
-        @AppModule.RemoteUserDataSource remote: IUserDataSource
-    ): IUserRepository = UserRepository(local, remote)
+        @AppModule.RemoteUserDataSource remote: IUserDataSource,
+        ioDispatcher: CoroutineDispatcher
+    ): IUserRepository = UserRepository(local, remote, ioDispatcher)
 
     @Provides
     @Singleton

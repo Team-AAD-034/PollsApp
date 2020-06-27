@@ -37,10 +37,12 @@ data class Choice(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(questionId)
-        parcel.writeString(choice)
-        parcel.writeInt(votes)
+        parcel.run {
+            writeString(id)
+            writeString(questionId)
+            writeString(choice)
+            writeInt(votes)
+        }
     }
 
     override fun describeContents(): Int = 0
